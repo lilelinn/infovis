@@ -1,1 +1,3 @@
-# De relatie tussen het aantal schietincidenten en het BBP per hoofd in de Verenigde Staten
+# jupyter-book-template
+
+This repository hosts the tutorial and template code for building a basic Jupyter Book website.

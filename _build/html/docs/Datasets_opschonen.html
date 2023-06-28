@@ -402,172 +402,72 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">gv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;stage3.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">gv</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/io/parsers/readers.py:912,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">899</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">900</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">908</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">909</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">912</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>incident_id</th>
-      <th>date</th>
-      <th>state</th>
-      <th>city_or_county</th>
-      <th>address</th>
-      <th>n_killed</th>
-      <th>n_injured</th>
-      <th>incident_url</th>
-      <th>source_url</th>
-      <th>incident_url_fields_missing</th>
-      <th>...</th>
-      <th>participant_age</th>
-      <th>participant_age_group</th>
-      <th>participant_gender</th>
-      <th>participant_name</th>
-      <th>participant_relationship</th>
-      <th>participant_status</th>
-      <th>participant_type</th>
-      <th>sources</th>
-      <th>state_house_district</th>
-      <th>state_senate_district</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>461105</td>
-      <td>2013-01-01</td>
-      <td>Pennsylvania</td>
-      <td>Mckeesport</td>
-      <td>1506 Versailles Avenue and Coursin Street</td>
-      <td>0</td>
-      <td>4</td>
-      <td>http://www.gunviolencearchive.org/incident/461105</td>
-      <td>http://www.post-gazette.com/local/south/2013/0...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::20</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Male||1::Male||3::Male||4::Female</td>
-      <td>0::Julian Sims</td>
-      <td>NaN</td>
-      <td>0::Arrested||1::Injured||2::Injured||3::Injure...</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Victim||4:...</td>
-      <td>http://pittsburgh.cbslocal.com/2013/01/01/4-pe...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>460726</td>
-      <td>2013-01-01</td>
-      <td>California</td>
-      <td>Hawthorne</td>
-      <td>13500 block of Cerise Avenue</td>
-      <td>1</td>
-      <td>3</td>
-      <td>http://www.gunviolencearchive.org/incident/460726</td>
-      <td>http://www.dailybulletin.com/article/zz/201301...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::20</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Male</td>
-      <td>0::Bernard Gillis</td>
-      <td>NaN</td>
-      <td>0::Killed||1::Injured||2::Injured||3::Injured</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Victim||4:...</td>
-      <td>http://losangeles.cbslocal.com/2013/01/01/man-...</td>
-      <td>62.0</td>
-      <td>35.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>478855</td>
-      <td>2013-01-01</td>
-      <td>Ohio</td>
-      <td>Lorain</td>
-      <td>1776 East 28th Street</td>
-      <td>1</td>
-      <td>3</td>
-      <td>http://www.gunviolencearchive.org/incident/478855</td>
-      <td>http://chronicle.northcoastnow.com/2013/02/14/...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::25||1::31||2::33||3::34||4::33</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Male||1::Male||2::Male||3::Male||4::Male</td>
-      <td>0::Damien Bell||1::Desmen Noble||2::Herman Sea...</td>
-      <td>NaN</td>
-      <td>0::Injured, Unharmed, Arrested||1::Unharmed, A...</td>
-      <td>0::Subject-Suspect||1::Subject-Suspect||2::Vic...</td>
-      <td>http://www.morningjournal.com/general-news/201...</td>
-      <td>56.0</td>
-      <td>13.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>478925</td>
-      <td>2013-01-05</td>
-      <td>Colorado</td>
-      <td>Aurora</td>
-      <td>16000 block of East Ithaca Place</td>
-      <td>4</td>
-      <td>0</td>
-      <td>http://www.gunviolencearchive.org/incident/478925</td>
-      <td>http://www.dailydemocrat.com/20130106/aurora-s...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::29||1::33||2::56||3::33</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Female||1::Male||2::Male||3::Male</td>
-      <td>0::Stacie Philbrook||1::Christopher Ratliffe||...</td>
-      <td>NaN</td>
-      <td>0::Killed||1::Killed||2::Killed||3::Killed</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Subject-Su...</td>
-      <td>http://denver.cbslocal.com/2013/01/06/officer-...</td>
-      <td>40.0</td>
-      <td>28.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>478959</td>
-      <td>2013-01-07</td>
-      <td>North Carolina</td>
-      <td>Greensboro</td>
-      <td>307 Mourning Dove Terrace</td>
-      <td>2</td>
-      <td>2</td>
-      <td>http://www.gunviolencearchive.org/incident/478959</td>
-      <td>http://www.journalnow.com/news/local/article_d...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::18||1::46||2::14||3::47</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Teen 12-17||3::...</td>
-      <td>0::Female||1::Male||2::Male||3::Female</td>
-      <td>0::Danielle Imani Jameison||1::Maurice Eugene ...</td>
-      <td>3::Family</td>
-      <td>0::Injured||1::Injured||2::Killed||3::Killed</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Subject-Su...</td>
-      <td>http://myfox8.com/2013/01/08/update-mother-sho...</td>
-      <td>62.0</td>
-      <td>27.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 29 columns</p>
-</div></div></div>
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/io/parsers/readers.py:577,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">577</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">579</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">580</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1407,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1404</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1406</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1407</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1661,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1659</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1660</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1661</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1662</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1663</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1664</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1665</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1666</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1667</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1668</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1669</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1670</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1671</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1672</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/io/common.py:859,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">854</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">859</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">863</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">867</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;stage3.csv&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Om deze dataset schoon te maken is het van belang om te filteren per jaar. De andere dataset beval namelijk informatie tot en met 2017, waar deze dataset door gaat tot 2018. Om dit op te lossen maken we eerst een aparte dataframe voor de relevante jaren. Door deze samen te voegen ontstaat de nieuwe, schoongemaakte dataset.</p>
 <p>Daarnaast staat ‘District of Columbia’ geregistreerd als area. Dit is daarentegen geen staat, dus deze moet ook verwijderd worden.</p>
