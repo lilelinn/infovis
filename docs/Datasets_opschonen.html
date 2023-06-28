@@ -420,153 +420,20 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>incident_id</th>
-      <th>date</th>
-      <th>state</th>
-      <th>city_or_county</th>
-      <th>address</th>
-      <th>n_killed</th>
-      <th>n_injured</th>
-      <th>incident_url</th>
-      <th>source_url</th>
-      <th>incident_url_fields_missing</th>
-      <th>...</th>
-      <th>participant_age</th>
-      <th>participant_age_group</th>
-      <th>participant_gender</th>
-      <th>participant_name</th>
-      <th>participant_relationship</th>
-      <th>participant_status</th>
-      <th>participant_type</th>
-      <th>sources</th>
-      <th>state_house_district</th>
-      <th>state_senate_district</th>
+      <th>version https://git-lfs.github.com/spec/v1</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>461105</td>
-      <td>2013-01-01</td>
-      <td>Pennsylvania</td>
-      <td>Mckeesport</td>
-      <td>1506 Versailles Avenue and Coursin Street</td>
-      <td>0</td>
-      <td>4</td>
-      <td>http://www.gunviolencearchive.org/incident/461105</td>
-      <td>http://www.post-gazette.com/local/south/2013/0...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::20</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Male||1::Male||3::Male||4::Female</td>
-      <td>0::Julian Sims</td>
-      <td>NaN</td>
-      <td>0::Arrested||1::Injured||2::Injured||3::Injure...</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Victim||4:...</td>
-      <td>http://pittsburgh.cbslocal.com/2013/01/01/4-pe...</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>oid sha256:c752945fb1d9252a61fbd2abdd8849999cc...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>460726</td>
-      <td>2013-01-01</td>
-      <td>California</td>
-      <td>Hawthorne</td>
-      <td>13500 block of Cerise Avenue</td>
-      <td>1</td>
-      <td>3</td>
-      <td>http://www.gunviolencearchive.org/incident/460726</td>
-      <td>http://www.dailybulletin.com/article/zz/201301...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::20</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Male</td>
-      <td>0::Bernard Gillis</td>
-      <td>NaN</td>
-      <td>0::Killed||1::Injured||2::Injured||3::Injured</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Victim||4:...</td>
-      <td>http://losangeles.cbslocal.com/2013/01/01/man-...</td>
-      <td>62.0</td>
-      <td>35.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>478855</td>
-      <td>2013-01-01</td>
-      <td>Ohio</td>
-      <td>Lorain</td>
-      <td>1776 East 28th Street</td>
-      <td>1</td>
-      <td>3</td>
-      <td>http://www.gunviolencearchive.org/incident/478855</td>
-      <td>http://chronicle.northcoastnow.com/2013/02/14/...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::25||1::31||2::33||3::34||4::33</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Male||1::Male||2::Male||3::Male||4::Male</td>
-      <td>0::Damien Bell||1::Desmen Noble||2::Herman Sea...</td>
-      <td>NaN</td>
-      <td>0::Injured, Unharmed, Arrested||1::Unharmed, A...</td>
-      <td>0::Subject-Suspect||1::Subject-Suspect||2::Vic...</td>
-      <td>http://www.morningjournal.com/general-news/201...</td>
-      <td>56.0</td>
-      <td>13.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>478925</td>
-      <td>2013-01-05</td>
-      <td>Colorado</td>
-      <td>Aurora</td>
-      <td>16000 block of East Ithaca Place</td>
-      <td>4</td>
-      <td>0</td>
-      <td>http://www.gunviolencearchive.org/incident/478925</td>
-      <td>http://www.dailydemocrat.com/20130106/aurora-s...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::29||1::33||2::56||3::33</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A...</td>
-      <td>0::Female||1::Male||2::Male||3::Male</td>
-      <td>0::Stacie Philbrook||1::Christopher Ratliffe||...</td>
-      <td>NaN</td>
-      <td>0::Killed||1::Killed||2::Killed||3::Killed</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Subject-Su...</td>
-      <td>http://denver.cbslocal.com/2013/01/06/officer-...</td>
-      <td>40.0</td>
-      <td>28.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>478959</td>
-      <td>2013-01-07</td>
-      <td>North Carolina</td>
-      <td>Greensboro</td>
-      <td>307 Mourning Dove Terrace</td>
-      <td>2</td>
-      <td>2</td>
-      <td>http://www.gunviolencearchive.org/incident/478959</td>
-      <td>http://www.journalnow.com/news/local/article_d...</td>
-      <td>False</td>
-      <td>...</td>
-      <td>0::18||1::46||2::14||3::47</td>
-      <td>0::Adult 18+||1::Adult 18+||2::Teen 12-17||3::...</td>
-      <td>0::Female||1::Male||2::Male||3::Female</td>
-      <td>0::Danielle Imani Jameison||1::Maurice Eugene ...</td>
-      <td>3::Family</td>
-      <td>0::Injured||1::Injured||2::Killed||3::Killed</td>
-      <td>0::Victim||1::Victim||2::Victim||3::Subject-Su...</td>
-      <td>http://myfox8.com/2013/01/08/update-mother-sho...</td>
-      <td>62.0</td>
-      <td>27.0</td>
+      <td>size 149698584</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 29 columns</p>
 </div></div></div>
 </div>
 <p>Om deze dataset schoon te maken is het van belang om te filteren per jaar. De andere dataset beval namelijk informatie tot en met 2017, waar deze dataset door gaat tot 2018. Om dit op te lossen maken we eerst een aparte dataframe voor de relevante jaren. Door deze samen te voegen ontstaat de nieuwe, schoongemaakte dataset.</p>
@@ -579,6 +446,54 @@ document.write(`
 
 <span class="c1"># verwijder district of columbia</span>
 <span class="n">gv</span> <span class="o">=</span> <span class="n">gv</span><span class="p">[</span><span class="n">gv</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s1">&#39;District of Columbia&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/indexes/base.py:3652,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3651</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3652</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3653</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/_libs/index.pyx:147,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/_libs/index.pyx:176,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7080,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7088,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;date&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># converteer de &#39;date&#39; kolom naar datetime</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">gv</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">gv</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># verwijder district of columbia</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">gv</span> <span class="o">=</span> <span class="n">gv</span><span class="p">[</span><span class="n">gv</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s1">&#39;District of Columbia&#39;</span><span class="p">]</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/frame.py:3761,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3759</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3760</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3761</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3762</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3763</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/indexes/base.py:3654,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3652</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3653</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3654</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3655</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3656</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3657</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3658</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3659</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;date&#39;
 </pre></div>
 </div>
 </div>
