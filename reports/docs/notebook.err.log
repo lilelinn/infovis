@@ -86,14 +86,14 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mUFuncTypeError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[8], line 7[0m
+Cell [0;32mIn[6], line 7[0m
 [1;32m      5[0m [38;5;66;03m# dictionary met de staten en het totaal aantal schietincidenten en gemiddelde bbp[39;00m
 [1;32m      6[0m gv_per_state [38;5;241m=[39m {x: gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[x] [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39munique()}
 [0;32m----> 7[0m gdp_per_state [38;5;241m=[39m [43m{[49m[43mx[49m[43m:[49m[43m [49m[43mgdp_grouped[49m[38;5;241;43m.[39;49m[43mloc[49m[43m[[49m[43mx[49m[43m][49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[43m)[49m[43m [49m[38;5;241;43m/[39;49m[43m [49m[38;5;241;43m5[39;49m[43m [49m[38;5;28;43;01mfor[39;49;00m[43m [49m[43mx[49m[43m [49m[38;5;129;43;01min[39;49;00m[43m [49m[43mgdp_grouped[49m[38;5;241;43m.[39;49m[43mindex[49m[43m}[49m
 [1;32m      9[0m [38;5;66;03m# sorteer de dictonaries op alfabetische volgorde van de staten[39;00m
 [1;32m     10[0m gv_ps_keys [38;5;241m=[39m [38;5;28mlist[39m(gv_per_state[38;5;241m.[39mkeys())
 
-Cell [0;32mIn[8], line 7[0m, in [0;36m<dictcomp>[0;34m(.0)[0m
+Cell [0;32mIn[6], line 7[0m, in [0;36m<dictcomp>[0;34m(.0)[0m
 [1;32m      5[0m [38;5;66;03m# dictionary met de staten en het totaal aantal schietincidenten en gemiddelde bbp[39;00m
 [1;32m      6[0m gv_per_state [38;5;241m=[39m {x: gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[x] [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39munique()}
 [0;32m----> 7[0m gdp_per_state [38;5;241m=[39m {x: [43mgdp_grouped[49m[38;5;241;43m.[39;49m[43mloc[49m[43m[[49m[43mx[49m[43m][49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[43m)[49m [38;5;241m/[39m [38;5;241m5[39m [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m gdp_grouped[38;5;241m.[39mindex}
@@ -173,7 +173,7 @@ File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas
 File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/numpy/core/_methods.py:49[0m, in [0;36m_sum[0;34m(a, axis, dtype, out, keepdims, initial, where)[0m
 [1;32m     47[0m [38;5;28;01mdef[39;00m [38;5;21m_sum[39m(a, axis[38;5;241m=[39m[38;5;28;01mNone[39;00m, dtype[38;5;241m=[39m[38;5;28;01mNone[39;00m, out[38;5;241m=[39m[38;5;28;01mNone[39;00m, keepdims[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
 [1;32m     48[0m          initial[38;5;241m=[39m_NoValue, where[38;5;241m=[39m[38;5;28;01mTrue[39;00m):
-[0;32m---> 49[0m     [38;5;28;01mreturn[39;00m umr_sum(a, axis, dtype, out, keepdims, initial, where)
+[0;32m---> 49[0m     [38;5;28;01mreturn[39;00m [43mumr_sum[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[43maxis[49m[43m,[49m[43m [49m[43mdtype[49m[43m,[49m[43m [49m[43mout[49m[43m,[49m[43m [49m[43mkeepdims[49m[43m,[49m[43m [49m[43minitial[49m[43m,[49m[43m [49m[43mwhere[49m[43m)[49m
 
 [0;31mUFuncTypeError[0m: ufunc 'add' did not contain a loop with signature matching types (dtype('int64'), dtype('<U2')) -> None
 
