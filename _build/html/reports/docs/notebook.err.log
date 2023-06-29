@@ -18,73 +18,162 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-gv['date'] = pd.to_datetime(gv['date'])
+# groepeer bbp dataset op staat
+gdp_grouped = gdp.groupby('Area').sum()
+gdp_grouped = gdp_grouped.drop(['Unnamed: 0'], axis=1)
 
-gv13 = gv[gv['date'].dt.year == 2013]
-gv14 = gv[gv['date'].dt.year == 2014]
-gv15 = gv[gv['date'].dt.year == 2015]
-gv16 = gv[gv['date'].dt.year == 2016]
-gv17 = gv[gv['date'].dt.year == 2017]
+# dictionary met de staten en het totaal aantal schietincidenten en gemiddelde bbp
+gv_per_state = {x: gv['state'].value_counts()[x] for x in gv['state'].unique()}
+gdp_per_state = {x: gdp_grouped.loc[x].sum() / 5 for x in gdp_grouped.index}
 
-x = [2013, 2014, 2015, 2016, 2017]
-y = [len(gv13), len(gv14), len(gv15), len(gv16), len(gv17)]
+# sorteer de dictonaries op alfabetische volgorde van de staten
+gv_ps_keys = list(gv_per_state.keys())
+gv_ps_keys.sort()
+gv_per_state = {i: gv_per_state[i] for i in gv_ps_keys}
 
-fig = go.Figure(data=go.Scatter(x=x, y=y, mode='lines'))
-fig.update_xaxes(
-    ticktext=x,
-    tickvals=[x[i] for i in range(len(x))],
-    tickmode='array',
-)
+# maak een lijst van de waarden en bereken het totaal
+gdp_total = list(list(gdp_per_state.values()))
+gv_total = list(gv_per_state.values())
 
-fig.update_layout(xaxis_title='Jaar<br><br>Figuur 1. Toename van schietincidenten in de VS in verloop van jaar<br><br><sup>De y-as geeft het aantal schietincidenten weer per tienduizenden. De x-as geeft de periode 2013-2017 in jaren weer.<br>In de periode van 2013-2017 is het aantal schietincidenten in de VS toegenomen. Een uitschieter is het jaar 2013, <br>omdat de organisatie in dit jaar begon met het bijhouden van schietincidenten.</br></sup>', 
-                  yaxis_title='Aantal schietincidenten'
-)
+# maak dataframe van net berekende gegevens
+gdp_gv_per_state = pd.DataFrame({'GDP per state (2013 - 2017)': gdp_total, 'Amount of gun violence incidents per state (2013 - 2017)': gv_total}, index=gv_ps_keys)
 
-fig.show()
+# maak plot
+plt.figure()
+
+# bereken min, max en gemiddelde voor het aantal incidenten en BBP
+mingv = min(gdp_gv_per_state['Amount of gun violence incidents per state (2013 - 2017)'])
+maxgv = max(gdp_gv_per_state['Amount of gun violence incidents per state (2013 - 2017)'])
+mingdp = min(gdp_gv_per_state['GDP per state (2013 - 2017)'])
+maxgdp = max(gdp_gv_per_state['GDP per state (2013 - 2017)'])
+avggv = gdp_gv_per_state['Amount of gun violence incidents per state (2013 - 2017)'].mean()
+avggdp = gdp_gv_per_state['GDP per state (2013 - 2017)'].mean()
+
+# maak kwadranten en kleur specifiek kwadrant in via het maken van een rechthoek
+ax = plt.axes()
+ax.add_patch(matplotlib.patches.Rectangle((avggv,mingdp), maxgv-avggv, avggdp-mingdp, color='#FF3A4E'))
+plt.plot([avggv, avggv], [0, maxgdp], linewidth=2, color='black')
+plt.plot([0, maxgv], [avggdp, avggdp], linewidth=2, color='black')
+
+# plot gegevens
+x = gdp_gv_per_state['Amount of gun violence incidents per state (2013 - 2017)']
+y = gdp_gv_per_state['GDP per state (2013 - 2017)']
+plt.scatter(x, y)
+
+# bepaal schaal
+plt.xlim((mingv,maxgv))
+plt.ylim((mingdp,maxgdp))
+
+# labels x- en y-as en titel
+plt.xlabel('Aantal schietincidenten per staat (2013 - 2017)')
+plt.ylabel('Gemiddelde BBP per hoofd per staat (2013 - 2017)')
+
+ax.text(0.5, -0.2, "Figuur 3. Aantal schietincidenten tegenover BBP per hoofd", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.3, "De y-as geeft het gemiddelde BBP per hoofd per staat over de periode 2013-2017", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.35, "weer in de de tienduizenden. De x-as geeft het aantal schietincidenten per staat over", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.4, "de periode 2013-2017 weer in de duizenden. De zwarte horizontale lijn geeft het gemiddelde", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.45, "van de y-as weer en de zwarte verticale lijn geeft het gemiddelde van de x-as weer.", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.5, "Het rode gemarkeerde kwadrant geeft een ondergemiddeld BBP weer,", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.55, "tegenover een bovengemiddeld aantal schietincidenten.", transform=ax.transAxes, ha='center')
+ax.text(0.5, -0.6, "Een laag BBP leidt niet direct leidt tot meer schietincidenten.", transform=ax.transAxes, ha='center')
+
+plt.gcf().set_size_inches((9, 6))
+
+# toon plot
+plt.show()
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mKeyError[0m                                  Traceback (most recent call last)
-File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/indexes/base.py:3652[0m, in [0;36mIndex.get_loc[0;34m(self, key)[0m
-[1;32m   3651[0m [38;5;28;01mtry[39;00m:
-[0;32m-> 3652[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_engine[49m[38;5;241;43m.[39;49m[43mget_loc[49m[43m([49m[43mcasted_key[49m[43m)[49m
-[1;32m   3653[0m [38;5;28;01mexcept[39;00m [38;5;167;01mKeyError[39;00m [38;5;28;01mas[39;00m err:
+[0;31mUFuncTypeError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[8], line 7[0m
+[1;32m      5[0m [38;5;66;03m# dictionary met de staten en het totaal aantal schietincidenten en gemiddelde bbp[39;00m
+[1;32m      6[0m gv_per_state [38;5;241m=[39m {x: gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[x] [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39munique()}
+[0;32m----> 7[0m gdp_per_state [38;5;241m=[39m [43m{[49m[43mx[49m[43m:[49m[43m [49m[43mgdp_grouped[49m[38;5;241;43m.[39;49m[43mloc[49m[43m[[49m[43mx[49m[43m][49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[43m)[49m[43m [49m[38;5;241;43m/[39;49m[43m [49m[38;5;241;43m5[39;49m[43m [49m[38;5;28;43;01mfor[39;49;00m[43m [49m[43mx[49m[43m [49m[38;5;129;43;01min[39;49;00m[43m [49m[43mgdp_grouped[49m[38;5;241;43m.[39;49m[43mindex[49m[43m}[49m
+[1;32m      9[0m [38;5;66;03m# sorteer de dictonaries op alfabetische volgorde van de staten[39;00m
+[1;32m     10[0m gv_ps_keys [38;5;241m=[39m [38;5;28mlist[39m(gv_per_state[38;5;241m.[39mkeys())
 
-File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/_libs/index.pyx:147[0m, in [0;36mpandas._libs.index.IndexEngine.get_loc[0;34m()[0m
+Cell [0;32mIn[8], line 7[0m, in [0;36m<dictcomp>[0;34m(.0)[0m
+[1;32m      5[0m [38;5;66;03m# dictionary met de staten en het totaal aantal schietincidenten en gemiddelde bbp[39;00m
+[1;32m      6[0m gv_per_state [38;5;241m=[39m {x: gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[x] [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m gv[[38;5;124m'[39m[38;5;124mstate[39m[38;5;124m'[39m][38;5;241m.[39munique()}
+[0;32m----> 7[0m gdp_per_state [38;5;241m=[39m {x: [43mgdp_grouped[49m[38;5;241;43m.[39;49m[43mloc[49m[43m[[49m[43mx[49m[43m][49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[43m)[49m [38;5;241m/[39m [38;5;241m5[39m [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m gdp_grouped[38;5;241m.[39mindex}
+[1;32m      9[0m [38;5;66;03m# sorteer de dictonaries op alfabetische volgorde van de staten[39;00m
+[1;32m     10[0m gv_ps_keys [38;5;241m=[39m [38;5;28mlist[39m(gv_per_state[38;5;241m.[39mkeys())
 
-File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/_libs/index.pyx:176[0m, in [0;36mpandas._libs.index.IndexEngine.get_loc[0;34m()[0m
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/generic.py:11512[0m, in [0;36mNDFrame._add_numeric_operations.<locals>.sum[0;34m(self, axis, skipna, numeric_only, min_count, **kwargs)[0m
+[1;32m  11493[0m [38;5;129m@doc[39m(  [38;5;66;03m# type: ignore[misc][39;00m
+[1;32m  11494[0m     _num_doc,
+[1;32m  11495[0m     desc[38;5;241m=[39m[38;5;124m"[39m[38;5;124mReturn the sum of the values over the requested axis.[39m[38;5;130;01m\n[39;00m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[0;32m   (...)[0m
+[1;32m  11510[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
+[1;32m  11511[0m ):
+[0;32m> 11512[0m     [38;5;28;01mreturn[39;00m [43mNDFrame[49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43maxis[49m[43m,[49m[43m [49m[43mskipna[49m[43m,[49m[43m [49m[43mnumeric_only[49m[43m,[49m[43m [49m[43mmin_count[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
 
-File [0;32mpandas/_libs/hashtable_class_helper.pxi:7080[0m, in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[0;34m()[0m
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/generic.py:11280[0m, in [0;36mNDFrame.sum[0;34m(self, axis, skipna, numeric_only, min_count, **kwargs)[0m
+[1;32m  11272[0m [38;5;28;01mdef[39;00m [38;5;21msum[39m(
+[1;32m  11273[0m     [38;5;28mself[39m,
+[1;32m  11274[0m     axis: Axis [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[0;32m   (...)[0m
+[1;32m  11278[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
+[1;32m  11279[0m ):
+[0;32m> 11280[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_min_count_stat_function[49m[43m([49m
+[1;32m  11281[0m [43m        [49m[38;5;124;43m"[39;49m[38;5;124;43msum[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mnanops[49m[38;5;241;43m.[39;49m[43mnansum[49m[43m,[49m[43m [49m[43maxis[49m[43m,[49m[43m [49m[43mskipna[49m[43m,[49m[43m [49m[43mnumeric_only[49m[43m,[49m[43m [49m[43mmin_count[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m
+[1;32m  11282[0m [43m    [49m[43m)[49m
 
-File [0;32mpandas/_libs/hashtable_class_helper.pxi:7088[0m, in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[0;34m()[0m
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/generic.py:11263[0m, in [0;36mNDFrame._min_count_stat_function[0;34m(self, name, func, axis, skipna, numeric_only, min_count, **kwargs)[0m
+[1;32m  11260[0m [38;5;28;01mif[39;00m axis [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m  11261[0m     axis [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_stat_axis_number
+[0;32m> 11263[0m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_reduce[49m[43m([49m
+[1;32m  11264[0m [43m    [49m[43mfunc[49m[43m,[49m
+[1;32m  11265[0m [43m    [49m[43mname[49m[38;5;241;43m=[39;49m[43mname[49m[43m,[49m
+[1;32m  11266[0m [43m    [49m[43maxis[49m[38;5;241;43m=[39;49m[43maxis[49m[43m,[49m
+[1;32m  11267[0m [43m    [49m[43mskipna[49m[38;5;241;43m=[39;49m[43mskipna[49m[43m,[49m
+[1;32m  11268[0m [43m    [49m[43mnumeric_only[49m[38;5;241;43m=[39;49m[43mnumeric_only[49m[43m,[49m
+[1;32m  11269[0m [43m    [49m[43mmin_count[49m[38;5;241;43m=[39;49m[43mmin_count[49m[43m,[49m
+[1;32m  11270[0m [43m[49m[43m)[49m
 
-[0;31mKeyError[0m: 'date'
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/series.py:4670[0m, in [0;36mSeries._reduce[0;34m(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)[0m
+[1;32m   4665[0m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m(
+[1;32m   4666[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mSeries.[39m[38;5;132;01m{[39;00mname[38;5;132;01m}[39;00m[38;5;124m does not allow [39m[38;5;132;01m{[39;00mkwd_name[38;5;132;01m}[39;00m[38;5;124m=[39m[38;5;132;01m{[39;00mnumeric_only[38;5;132;01m}[39;00m[38;5;124m [39m[38;5;124m"[39m
+[1;32m   4667[0m         [38;5;124m"[39m[38;5;124mwith non-numeric dtypes.[39m[38;5;124m"[39m
+[1;32m   4668[0m     )
+[1;32m   4669[0m [38;5;28;01mwith[39;00m np[38;5;241m.[39merrstate([38;5;28mall[39m[38;5;241m=[39m[38;5;124m"[39m[38;5;124mignore[39m[38;5;124m"[39m):
+[0;32m-> 4670[0m     [38;5;28;01mreturn[39;00m [43mop[49m[43m([49m[43mdelegate[49m[43m,[49m[43m [49m[43mskipna[49m[38;5;241;43m=[39;49m[43mskipna[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
 
-The above exception was the direct cause of the following exception:
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/nanops.py:96[0m, in [0;36mdisallow.__call__.<locals>._f[0;34m(*args, **kwargs)[0m
+[1;32m     94[0m [38;5;28;01mtry[39;00m:
+[1;32m     95[0m     [38;5;28;01mwith[39;00m np[38;5;241m.[39merrstate(invalid[38;5;241m=[39m[38;5;124m"[39m[38;5;124mignore[39m[38;5;124m"[39m):
+[0;32m---> 96[0m         [38;5;28;01mreturn[39;00m [43mf[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m     97[0m [38;5;28;01mexcept[39;00m [38;5;167;01mValueError[39;00m [38;5;28;01mas[39;00m e:
+[1;32m     98[0m     [38;5;66;03m# we want to transform an object array[39;00m
+[1;32m     99[0m     [38;5;66;03m# ValueError message to the more typical TypeError[39;00m
+[1;32m    100[0m     [38;5;66;03m# e.g. this is normally a disallowed function on[39;00m
+[1;32m    101[0m     [38;5;66;03m# object arrays that contain strings[39;00m
+[1;32m    102[0m     [38;5;28;01mif[39;00m is_object_dtype(args[[38;5;241m0[39m]):
 
-[0;31mKeyError[0m                                  Traceback (most recent call last)
-Cell [0;32mIn[3], line 1[0m
-[0;32m----> 1[0m gv[[38;5;124m'[39m[38;5;124mdate[39m[38;5;124m'[39m] [38;5;241m=[39m pd[38;5;241m.[39mto_datetime([43mgv[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mdate[39;49m[38;5;124;43m'[39;49m[43m][49m)
-[1;32m      3[0m gv13 [38;5;241m=[39m gv[gv[[38;5;124m'[39m[38;5;124mdate[39m[38;5;124m'[39m][38;5;241m.[39mdt[38;5;241m.[39myear [38;5;241m==[39m [38;5;241m2013[39m]
-[1;32m      4[0m gv14 [38;5;241m=[39m gv[gv[[38;5;124m'[39m[38;5;124mdate[39m[38;5;124m'[39m][38;5;241m.[39mdt[38;5;241m.[39myear [38;5;241m==[39m [38;5;241m2014[39m]
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/nanops.py:421[0m, in [0;36m_datetimelike_compat.<locals>.new_func[0;34m(values, axis, skipna, mask, **kwargs)[0m
+[1;32m    418[0m [38;5;28;01mif[39;00m datetimelike [38;5;129;01mand[39;00m mask [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m    419[0m     mask [38;5;241m=[39m isna(values)
+[0;32m--> 421[0m result [38;5;241m=[39m [43mfunc[49m[43m([49m[43mvalues[49m[43m,[49m[43m [49m[43maxis[49m[38;5;241;43m=[39;49m[43maxis[49m[43m,[49m[43m [49m[43mskipna[49m[38;5;241;43m=[39;49m[43mskipna[49m[43m,[49m[43m [49m[43mmask[49m[38;5;241;43m=[39;49m[43mmask[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    423[0m [38;5;28;01mif[39;00m datetimelike:
+[1;32m    424[0m     result [38;5;241m=[39m _wrap_results(result, orig_values[38;5;241m.[39mdtype, fill_value[38;5;241m=[39miNaT)
 
-File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/frame.py:3761[0m, in [0;36mDataFrame.__getitem__[0;34m(self, key)[0m
-[1;32m   3759[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mcolumns[38;5;241m.[39mnlevels [38;5;241m>[39m [38;5;241m1[39m:
-[1;32m   3760[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_getitem_multilevel(key)
-[0;32m-> 3761[0m indexer [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mcolumns[49m[38;5;241;43m.[39;49m[43mget_loc[49m[43m([49m[43mkey[49m[43m)[49m
-[1;32m   3762[0m [38;5;28;01mif[39;00m is_integer(indexer):
-[1;32m   3763[0m     indexer [38;5;241m=[39m [indexer]
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/nanops.py:494[0m, in [0;36mmaybe_operate_rowwise.<locals>.newfunc[0;34m(values, axis, **kwargs)[0m
+[1;32m    491[0m         results [38;5;241m=[39m [func(x, [38;5;241m*[39m[38;5;241m*[39mkwargs) [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m arrs]
+[1;32m    492[0m     [38;5;28;01mreturn[39;00m np[38;5;241m.[39marray(results)
+[0;32m--> 494[0m [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[43mvalues[49m[43m,[49m[43m [49m[43maxis[49m[38;5;241;43m=[39;49m[43maxis[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
 
-File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/indexes/base.py:3654[0m, in [0;36mIndex.get_loc[0;34m(self, key)[0m
-[1;32m   3652[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_engine[38;5;241m.[39mget_loc(casted_key)
-[1;32m   3653[0m [38;5;28;01mexcept[39;00m [38;5;167;01mKeyError[39;00m [38;5;28;01mas[39;00m err:
-[0;32m-> 3654[0m     [38;5;28;01mraise[39;00m [38;5;167;01mKeyError[39;00m(key) [38;5;28;01mfrom[39;00m [38;5;21;01merr[39;00m
-[1;32m   3655[0m [38;5;28;01mexcept[39;00m [38;5;167;01mTypeError[39;00m:
-[1;32m   3656[0m     [38;5;66;03m# If we have a listlike key, _check_indexing_error will raise[39;00m
-[1;32m   3657[0m     [38;5;66;03m#  InvalidIndexError. Otherwise we fall through and re-raise[39;00m
-[1;32m   3658[0m     [38;5;66;03m#  the TypeError.[39;00m
-[1;32m   3659[0m     [38;5;28mself[39m[38;5;241m.[39m_check_indexing_error(key)
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/core/nanops.py:652[0m, in [0;36mnansum[0;34m(values, axis, skipna, min_count, mask)[0m
+[1;32m    649[0m [38;5;28;01melif[39;00m is_timedelta64_dtype(dtype):
+[1;32m    650[0m     dtype_sum [38;5;241m=[39m np[38;5;241m.[39mdtype(np[38;5;241m.[39mfloat64)
+[0;32m--> 652[0m the_sum [38;5;241m=[39m [43mvalues[49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[43maxis[49m[43m,[49m[43m [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mdtype_sum[49m[43m)[49m
+[1;32m    653[0m the_sum [38;5;241m=[39m _maybe_null_out(the_sum, axis, mask, values[38;5;241m.[39mshape, min_count[38;5;241m=[39mmin_count)
+[1;32m    655[0m [38;5;28;01mreturn[39;00m the_sum
 
-[0;31mKeyError[0m: 'date'
+File [0;32m~/opt/anaconda3/envs/jupyterbook/lib/python3.11/site-packages/numpy/core/_methods.py:49[0m, in [0;36m_sum[0;34m(a, axis, dtype, out, keepdims, initial, where)[0m
+[1;32m     47[0m [38;5;28;01mdef[39;00m [38;5;21m_sum[39m(a, axis[38;5;241m=[39m[38;5;28;01mNone[39;00m, dtype[38;5;241m=[39m[38;5;28;01mNone[39;00m, out[38;5;241m=[39m[38;5;28;01mNone[39;00m, keepdims[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
+[1;32m     48[0m          initial[38;5;241m=[39m_NoValue, where[38;5;241m=[39m[38;5;28;01mTrue[39;00m):
+[0;32m---> 49[0m     [38;5;28;01mreturn[39;00m umr_sum(a, axis, dtype, out, keepdims, initial, where)
+
+[0;31mUFuncTypeError[0m: ufunc 'add' did not contain a loop with signature matching types (dtype('int64'), dtype('<U2')) -> None
 
