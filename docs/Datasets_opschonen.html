@@ -378,6 +378,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-schietincidenten">Dataset schietincidenten</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-bbp">Dataset BBP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-geweren">Dataset geweren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-uitgaven-bbp">Dataset uitgaven BBP</a></li>
 </ul>
             </nav>
         </div>
@@ -986,6 +988,710 @@ Lile Lin (14654806)</p>
 </div>
 </div>
 </section>
+<section id="dataset-geweren">
+<h2>Dataset geweren<a class="headerlink" href="#dataset-geweren" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;us_gun_production1.csv&#39;</span><span class="p">)</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Pistols</th>
+      <th>Revolvers</th>
+      <th>Total Handguns</th>
+      <th>Rifles</th>
+      <th>Shotguns</th>
+      <th>Total Long Guns</th>
+      <th>Misc. Firearms</th>
+      <th>Total Manufactured</th>
+      <th>Shotguns.1</th>
+      <th>...</th>
+      <th>Gun Deaths</th>
+      <th>Gun Death Rate</th>
+      <th>Age Adjusted</th>
+      <th>Homicides</th>
+      <th>Homicide Rate</th>
+      <th>Age Adjusted.1</th>
+      <th>Suicides</th>
+      <th>Suicide Rate</th>
+      <th>Age Adjusted.2</th>
+      <th>Population</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1899-1945</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>11,722,000</td>
+      <td>20,651,000</td>
+      <td>13,338,000</td>
+      <td>33,989,000</td>
+      <td>NaN</td>
+      <td>45,711,000</td>
+      <td>713</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1946</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>176</td>
+      <td>729</td>
+      <td>621</td>
+      <td>1,350,000</td>
+      <td>NaN</td>
+      <td>1,526,000</td>
+      <td>7</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>141,388,566</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1947</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>257</td>
+      <td>953</td>
+      <td>860</td>
+      <td>1,813,000</td>
+      <td>NaN</td>
+      <td>2,070,000</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144,126,071</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1948</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>427</td>
+      <td>1,170,000</td>
+      <td>1,013,000</td>
+      <td>2,183,000</td>
+      <td>NaN</td>
+      <td>2,610,000</td>
+      <td>29</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>146,631,302</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1949</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>256</td>
+      <td>862</td>
+      <td>1,050,000</td>
+      <td>1,912,000</td>
+      <td>NaN</td>
+      <td>2,168,000</td>
+      <td>24</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>149,188,130</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 46 columns</p>
+</div></div></div>
+</div>
+<p>Bij het schoonamaken van deze dataset kijken we vooral naar het toevoegen van een kolom: het totaal aantal geweren in circulatie in de VS per jaar. Om dit te bereiken moet een berekening gemaakt worden: het totaal geproduceerd - het totaal geëxporteerd + het totaal geimporteerd. Voor deze berekeningen moeten de punten en komma’s die momenteel in die velden staan om duizentallen aan te geven weggehaald worden. Pas dan kan de berekening plaatsvinden.</p>
+<p>Verder wordt de rij met informatie over de jaren 1899 - 1945 verwijderd. Dit is een samenvoeging van 46 jaar, en is daardoor een enorme uitschieter ten opzichte van de overige jaren. Verder maken we de kolom met jaren de index van de dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set index en verwijder 1899 - 1945</span>
+<span class="n">gc</span> <span class="o">=</span> <span class="n">gc</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+<span class="n">gc</span> <span class="o">=</span> <span class="n">gc</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;1899-1945&#39;</span><span class="p">])</span>
+
+<span class="c1"># kolommen bereid maken voor berekeningen d.m.v. replace</span>
+<span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Imported&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Imported&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Imported&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Imported&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;\.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Manufactured&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Manufactured&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Exported&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Exported&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;\.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Exported&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Exported&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># berekeningen totaal aantal geweren in de VS per jaar</span>
+<span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Circulated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Manufactured&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">-</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Exported&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">+</span> <span class="n">gc</span><span class="p">[</span><span class="s1">&#39;Total Imported&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pistols</th>
+      <th>Revolvers</th>
+      <th>Total Handguns</th>
+      <th>Rifles</th>
+      <th>Shotguns</th>
+      <th>Total Long Guns</th>
+      <th>Misc. Firearms</th>
+      <th>Total Manufactured</th>
+      <th>Shotguns.1</th>
+      <th>Rifles.1</th>
+      <th>...</th>
+      <th>Gun Death Rate</th>
+      <th>Age Adjusted</th>
+      <th>Homicides</th>
+      <th>Homicide Rate</th>
+      <th>Age Adjusted.1</th>
+      <th>Suicides</th>
+      <th>Suicide Rate</th>
+      <th>Age Adjusted.2</th>
+      <th>Population</th>
+      <th>Total Circulated</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1946</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>176</td>
+      <td>729</td>
+      <td>621</td>
+      <td>1,350,000</td>
+      <td>NaN</td>
+      <td>1526000</td>
+      <td>7</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>141,388,566</td>
+      <td>1525884</td>
+    </tr>
+    <tr>
+      <th>1947</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>257</td>
+      <td>953</td>
+      <td>860</td>
+      <td>1,813,000</td>
+      <td>NaN</td>
+      <td>2070000</td>
+      <td>23</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>144,126,071</td>
+      <td>2069863</td>
+    </tr>
+    <tr>
+      <th>1948</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>427</td>
+      <td>1,170,000</td>
+      <td>1,013,000</td>
+      <td>2,183,000</td>
+      <td>NaN</td>
+      <td>2610000</td>
+      <td>29</td>
+      <td>4</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>146,631,302</td>
+      <td>2609840</td>
+    </tr>
+    <tr>
+      <th>1949</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>256</td>
+      <td>862</td>
+      <td>1,050,000</td>
+      <td>1,912,000</td>
+      <td>NaN</td>
+      <td>2168000</td>
+      <td>24</td>
+      <td>5</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>149,188,130</td>
+      <td>2167861</td>
+    </tr>
+    <tr>
+      <th>1950</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>261</td>
+      <td>847</td>
+      <td>1,324,000</td>
+      <td>2,171,000</td>
+      <td>NaN</td>
+      <td>2432000</td>
+      <td>32</td>
+      <td>14</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>152,271,417</td>
+      <td>2431867</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 46 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exporteren</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;gc_cleaned.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataset-uitgaven-bbp">
+<h2>Dataset uitgaven BBP<a class="headerlink" href="#dataset-uitgaven-bbp" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imfdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;imfdm.csv&#39;</span><span class="p">)</span>
+<span class="n">imfdf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>1800</th>
+      <th>1801</th>
+      <th>1802</th>
+      <th>1803</th>
+      <th>1804</th>
+      <th>1805</th>
+      <th>1806</th>
+      <th>1807</th>
+      <th>1808</th>
+      <th>...</th>
+      <th>2012</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+      <th>2016</th>
+      <th>2017</th>
+      <th>2018</th>
+      <th>2019</th>
+      <th>2020</th>
+      <th>2021</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>France</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>...</td>
+      <td>57.107273</td>
+      <td>57.227815</td>
+      <td>57.213602</td>
+      <td>56.797572</td>
+      <td>56.685849</td>
+      <td>56.503451</td>
+      <td>55.644550</td>
+      <td>55.351806</td>
+      <td>61.421230</td>
+      <td>59.052498</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>India</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>...</td>
+      <td>27.363855</td>
+      <td>26.599948</td>
+      <td>26.220442</td>
+      <td>27.058974</td>
+      <td>27.232844</td>
+      <td>26.231663</td>
+      <td>26.327665</td>
+      <td>27.422791</td>
+      <td>31.052288</td>
+      <td>30.136706</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Italy</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>...</td>
+      <td>50.590048</td>
+      <td>50.951542</td>
+      <td>50.855503</td>
+      <td>50.317122</td>
+      <td>49.078421</td>
+      <td>48.763354</td>
+      <td>48.394002</td>
+      <td>48.473339</td>
+      <td>56.997151</td>
+      <td>55.449510</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Japan</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>...</td>
+      <td>38.638009</td>
+      <td>38.778193</td>
+      <td>38.388963</td>
+      <td>37.295233</td>
+      <td>37.229276</td>
+      <td>36.686079</td>
+      <td>36.737991</td>
+      <td>37.265617</td>
+      <td>44.595645</td>
+      <td>42.520295</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>South Africa</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>...</td>
+      <td>28.618683</td>
+      <td>28.910083</td>
+      <td>29.321060</td>
+      <td>30.164090</td>
+      <td>29.908567</td>
+      <td>29.859959</td>
+      <td>30.234479</td>
+      <td>31.458023</td>
+      <td>34.638389</td>
+      <td>32.976269</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 223 columns</p>
+</div></div></div>
+</div>
+<p>Om deze dataset schoon te maken moet er vrij weinig gebeuren. Alles wat we aanpassen is de index (deze zetten we eerst naar Country, maar zal later veranderen) en we draaien de dataframe om, zodat de jaren als rijen staan. Dit omdat de dataframe dan dezelfde structuur heeft als de eerdere datasets.</p>
+<p>Na het omdraaien zal de index veranderen van de landen naar de jaren. Zo heeft deze dataframe (op lengte na) dezelfde index als de dataset hiervoor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># zet index en draai dataframe om</span>
+<span class="n">imfdf</span> <span class="o">=</span> <span class="n">imfdf</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+<span class="n">imfdf</span> <span class="o">=</span> <span class="n">imfdf</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imfdf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Country</th>
+      <th>France</th>
+      <th>India</th>
+      <th>Italy</th>
+      <th>Japan</th>
+      <th>South Africa</th>
+      <th>Spain</th>
+      <th>Sweden</th>
+      <th>United Kingdom</th>
+      <th>United States</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1800</th>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>6.343307018</td>
+      <td>no data</td>
+      <td>2.349889994</td>
+    </tr>
+    <tr>
+      <th>1801</th>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>5.446875095</td>
+      <td>no data</td>
+      <td>1.779360056</td>
+    </tr>
+    <tr>
+      <th>1802</th>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>5.28484869</td>
+      <td>no data</td>
+      <td>1.604490042</td>
+    </tr>
+    <tr>
+      <th>1803</th>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>7.122656345</td>
+      <td>no data</td>
+      <td>1.609019995</td>
+    </tr>
+    <tr>
+      <th>1804</th>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>no data</td>
+      <td>8.147619247</td>
+      <td>no data</td>
+      <td>1.632769942</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exporteren</span>
+<span class="n">imfdf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;imfdm_cleaned.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1048,6 +1754,8 @@ Lile Lin (14654806)</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-schietincidenten">Dataset schietincidenten</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-bbp">Dataset BBP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-geweren">Dataset geweren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-uitgaven-bbp">Dataset uitgaven BBP</a></li>
 </ul>
   </nav></div>
 
